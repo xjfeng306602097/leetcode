@@ -40,23 +40,21 @@ package 链表;
 public class 环形链表II142 {
 
     public static ListNode detectCycle(ListNode head) {
-        // 通过快慢指针判断是否有环
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode fast = dummy.next.next;
-        ListNode slow = dummy.next;
-        // 遍历找到连接环的节点
-        while (fast != slow) {
-            if (fast.next == null || fast.next.next == null) {
-                // 无环，跳出循环,返回空
-                return null;
-            }
+        // 通过快慢指针实现判断是否存在环
+        ListNode fast = head, slow = head;
+        while (true) {
+            if (fast == null || fast.next == null) return null;
             fast = fast.next.next;
             slow = slow.next;
+            if (fast == slow) break;
         }
         // 此时有环,需要从新遍历head链表，寻找入环的位置
-
-        return null;
+        fast = head;
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return fast;
     }
 
 }
