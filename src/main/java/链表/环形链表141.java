@@ -47,7 +47,10 @@ public class 环形链表141 {
 
     public boolean hasCycle(ListNode head) {
         // 通过快慢指针，判断是否存在环
-        ListNode fast = head.next;
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode fast= head.next;
         ListNode slow = head;
         while (fast != slow) {
             if (fast.next == null || fast.next.next == null) {
